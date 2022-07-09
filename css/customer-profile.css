@@ -1,10 +1,10 @@
 .cust_profile_container {
   /* //background-color: wheat; */
+  float: center;
+  /* margin-left: 500px; */
 }
 
 .acc_details {
-  width: 25%;
-  height: 45%;
   background-color: rgb(242, 242, 242);
   float: left;
   padding: 2%;
@@ -24,7 +24,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.statement {
+/* .statement {
   height: 45%;
   width: 58%;
   padding: 2%;
@@ -34,7 +34,7 @@
   overflow: auto;
   text-align: center;
   border: 1px solid rgba(44, 78, 134, 0.3);
-}
+} */
 
 .statement table {
   width: 100%;
@@ -46,7 +46,7 @@
   /* //padding: 20px; */
   text-align: center;
 }
-.statement table th {
+/* .statement table th {
   color: white;
   background-color: #005f7d;
   border: 1px solid rgb(219, 219, 219);
@@ -65,4 +65,4 @@
 
   padding: 1%;
   height: 50px;
-}
+} */

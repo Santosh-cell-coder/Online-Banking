@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Registration Form</title>
-    <link rel="stylesheet" type="text/css" href="css/customer_reg_form.css"/>
+    <link rel="stylesheet" type="text/css" href="css/customer-reg-form.css"/>
     
 	 <?php include'header.php';  ?>
     </head>
@@ -10,6 +10,7 @@
     <div class="container_regfrm_container_parent">
 	<h3>Online Account Opening Form</h3>
 	<div class="container_regfrm_container_parent_child">
+	
 		<form action="connection.php" method="post">
 				 <input type="text" name="name" placeholder="Name" id="name" required />
 				 <select name ="gender" id="gender" required >
@@ -61,9 +62,15 @@
 
 				 
 				 <input type="text" name="pin" placeholder="Pin Code"  id="pin" required />
+				 <br>
+				 <input type="password" name="password1" placeholder="Set login Password"  id="password" required />
+				 <br>
+				 <input type="password" name="password2" placeholder="*Retype password"  id="password" required />
 				<input type="submit" name="submit" value="Submit">
 				</form>
+			
          </div>
+		 
 		 </div>
 		 
  <?php include'footer.php';?> 

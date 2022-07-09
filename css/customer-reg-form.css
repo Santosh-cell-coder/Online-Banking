@@ -28,7 +28,7 @@
 }
 
 .container_regfrm_container_parent_child input[type="text"],
-input[type="date"],
+input[type="date"],input[type="password"],
 select {
   width: 20%;
   padding: 0.5%;

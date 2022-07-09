@@ -2,34 +2,8 @@ create table `branch`(
     `branch_name` varchar(25),
     `assets` float(13,2)
 );
-
-create table `account`(
-    `account_number` int(10) not null AUTO_INCREMENT,
-    `branch_name` varchar(25),
-    `balance` float(12,2),
-    primary key(`account_number`)
-);
-create table `depositor`(
-    `customer_id` int(10),
-    `account_number` int(10)
-);
--- create table `customer`(
---     `customer_id` varchar(10),
---     `customer_name` varchar(35),
---     `customer_city` varchar(25),
---     `customer_street` varchar(25)
--- );
-create table `borrower`(
-    `customer_id` int(10),
-    `loan_number` varchar(12)
-);
-create table `loan`(
-    `loan_number` varchar(12),
-    `branch_name` varchar(25),
-    `amount` float(12,2)
-);
 create table `registration`(
-    `customer_id` int(10) not null AUTO_INCREMENT,
+    `Customer_Id` int(10) not null,
     `customer_name` varchar(35) not null,
     `gender` varchar(1) not null,
     `dob` date not null,
@@ -40,9 +14,39 @@ create table `registration`(
     `customer_street` varchar(25),
     `branch_name` varchar(25) not null,
     `pin` varchar(6) not null,
+    `password` varchar(35) not null,
     `InDtTm` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    primary key (`customer_id`)
+    primary key (`Customer_Id`)
 );
+create table `depositor`(
+    `account_number` int(10),
+    `deposite_amount` int(10)
+);
+-- create table `customer`(
+--     `Customer_Id` varchar(10),
+--     `customer_name` varchar(35),
+--     `customer_city` varchar(25),
+--     `customer_street` varchar(25)
+-- );
+create table `borrower`(
+    `Customer_Id` int(10),
+    `loan_number` varchar(12)
+);
+create table `loan`(
+    `loan_number` varchar(12),
+    `branch_name` varchar(25),
+    `amount` float(12,2)
+);
+
+create table `account`(
+    `Customer_Id` int(10) not null,
+    `customer_name` varchar(35) not null,
+    `branch_name` varchar(25),
+    `account_number` int(10) ,
+    `balance` float(12,2) DEFAULT null,
+    primary key (`account_number`)
+);
+
 
 alter table `branch` add  primary key (`branch_name`);
 
@@ -61,10 +65,10 @@ alter table `loan` add  primary key (`loan_number`);
 alter table `account` add constraint `fk_const` foreign key (`branch_name`)
 references `branch`(`branch_name`) ; 
 
-alter table `depositor` add constraint `fk1_const` foreign key (`customer_id`)
-references `registration`(`customer_id`);
+alter table `account` add constraint `fk2_const` foreign key (`Customer_Id`)
+references `registration`(`Customer_Id`) ; 
 
-alter table `depositor` add constraint `fk2_const` foreign key (`account_number`)
+alter table `depositor` add constraint `fk1_const` foreign key (`account_number`)
 references `account`(`account_number`);
 
 alter table `loan` add constraint `fk3_const` foreign key (`branch_name`)
@@ -73,9 +77,8 @@ references `branch`(`branch_name`);
 alter table `borrower` add constraint `fk6_const` foreign key (`loan_number`)
 references `loan`(`loan_number`);
 
-alter table `borrower` add constraint `fk4_const` foreign key (`customer_id`)
-references `registration`(`customer_id`);
-
+alter table `borrower` add constraint `fk4_const` foreign key (`Customer_Id`)
+references `registration`(`Customer_Id`);
 
 alter table `registration` add constraint `fk5_const` foreign key (`branch_name`)
 references `branch`(`branch_name`);
@@ -112,7 +115,10 @@ insert into `branch` values("Rajbiraj",400000000);
 insert into `branch` values("Baglung",100000000);
 insert into `branch` values("Tansen",90000000);
 
--- insert into `registration` values("Sanjog Shrestha","m","2000-06-26","9812899991","ssanjogshrestha@gmail.com",
---         "52-39-03987","Ghorahi","Bank road","Ghorahi","456852",1001);
+insert into `registration` values(100,"Sanjog Shrestha","m","2000-06-26","9812899991","ssanjogshrestha@gmail.com",
+        "52-39-03987","Ghorahi","Bank road","Ghorahi","456852","password1",null);
+
+insert into `account` values(100,"Sanjog Shrestha","Ghorahi",1010100,0.00);
 
 
+-- insert into `account` values(124567,1001,"Ghorahi",null);
