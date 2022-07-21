@@ -1,4 +1,5 @@
 <?php
+include "header.php";
 $customer_name = $_POST['name'];
 $gender = $_POST['gender'];
 $dob = $_POST['dob'];
@@ -27,14 +28,39 @@ else{
     '$citizenship', '$customer_city', '$customer_street','$branch_name','$pin','$password')";
     $conn->query($stmt);
     $conn->commit();
-    echo "<h3>Registration successfull.....</h3>";
     $acc = "INSERT INTO account(`Customer_Id`,`customer_name`,`branch_name`,`account_number`) 
     value('$Customer_Id','$customer_name','$branch_name','$account_number')";
     $conn->query($acc);
     $conn->commit();
+    
+    $record="CREATE TABLE recordbook_$Customer_Id ( 
+    `Customer_Id` int(10) NOT NULL,
+    `transaction_id` varchar(10),
+    `Cr_amount` varchar(10),
+    `Dr_amount` varchar(10),
+    `Net_Balance` varchar(12),
+    `Remark` varchar(50),
+    `transaction_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    primary key (`transaction_id`),
+    FOREIGN KEY (`Customer_Id`) REFERENCES registration(`Customer_Id`) ON DELETE CASCADE
+  )";
+
+  $conn->query($record);
+  $conn->commit();
+
     $conn->close();
+    echo "<h3>Registration successfull.....</h3>";
 }}
 else{
-    die("<h2>Password doesnot match .Please check you password and resubmit !!!</h2>");
+    die("<h3>Password doesnot match .Please check you password and resubmit !!!</h3>");
 }
 ?> 
+<html>
+    <h3>Your Login Id is &nbsp; <?php echo $Customer_Id?> </h3>
+    <style>
+        h3{
+            background-color:#00ab41;
+            color:white;
+        }
+    </style>
+</html>

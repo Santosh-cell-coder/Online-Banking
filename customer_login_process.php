@@ -10,7 +10,7 @@ if(isset($_POST['customer_id'])){
 		$sql="SELECT * FROM registration where Customer_Id ='$customer_id' and password='$password' ";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
-		if($customer_id != $row['Customer_Id'] && $password != $row['password']){
+		if($row==NULL){
 			
 		echo '<script>alert("Incorrect customer_id/Password.")</script>';
 			
@@ -19,8 +19,6 @@ if(isset($_POST['customer_id'])){
 			
 			
 		else{
-			
-      
 		$_SESSION['customer_login'] = true;
         $_SESSION['Customer_Id'] = $customer_id;
 		$_SESSION['customer_name'] = $row['customer_name'];
@@ -32,6 +30,7 @@ if(isset($_POST['customer_id'])){
 		$_SESSION['customer_city']= $row['customer_city'];
 		$_SESSION['customer_street'] = $row['customer_street'];
 		$_SESSION['branch_name'] =$row['branch_name'];
+		$_SESSION['pin'] =$row['pin'];
 		date_default_timezone_set('Asia/kathmandu'); 
 		$_SESSION['this_login'] = date("d/m/y h:i:s A");
 

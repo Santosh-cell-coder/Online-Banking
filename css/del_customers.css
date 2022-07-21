@@ -1,0 +1,46 @@
+.del_container{
+    background-color: rgb(158, 199, 250);
+    width: 60%;
+    float: left;
+    margin-left: 20% ;
+    text-align: center;
+    margin-top: 8%;
+    -moz-box-shadow:    3px 3px 5px 6px rgb(37, 33, 33);
+    -webkit-box-shadow: 3px 3px 5px 6px rgb(53, 45, 45);
+    box-shadow:         3px 3px 5px 0px rgb(49, 35, 35);
+}
+#head_box{
+    padding: 5% 5% 2.5% 5%;
+    color:rgb(41, 44, 33);
+    font-family:Arial, Helvetica, sans-serif;
+}
+#warning{
+    background-color: rgb(87, 36, 36);
+    color:whitesmoke;
+}
+fieldset input[type="number"]{
+    border-radius: 2%;
+        font-size: 125%;
+        border: 1px solid rgb(40, 37, 37);
+        margin-top: 10px;
+      
+}
+#first_inp{
+    display: inline-block;
+}
+#sec_inp{
+    cursor: pointer;
+    position: relative;
+    padding: 0.8%;
+    font-size:125%;
+    width: 15%;
+    border: 1px solid #426bd7;
+    background-color: rgb(169, 48, 48);
+    border-radius: 5%;
+    color: white;
+}
+#sec_inp:hover{
+    background-color: rgb(219, 15, 15);
+    transition: 0.5s;
+    padding: 1%;
+}

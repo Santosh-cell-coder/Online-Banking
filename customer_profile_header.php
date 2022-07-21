@@ -53,7 +53,7 @@ if($_SESSION['customer_login'] != true)
              <label>Welcome <?php echo $_SESSION['customer_name']; ?></label>
              </label><h6 class="lstlogin">Last login : <?php echo $_SESSION['this_login'] ?> </h6>
                   </div>
-            <a class="cust_home" href="customer_profile.php"><input type="button" name="home" value="Home" id="home"></a>
+            <a class="cust_home" href="customer-profile.php"><input type="button" name="home" value="Home" id="home"></a>
             <a class="cust_logout" href="customer_logout.php"><input type="button" name="logout_btn" value="Logout" id="logout"></a>
             
         </div>
@@ -63,9 +63,12 @@ if($_SESSION['customer_login'] != true)
         <div class="profile_nav">
         <ul>
             <a href="customer_profile_myacc.php"><li class="link1">My Account</li></a>
-            <a href="customer_pass_change.php"><li class="link3">Change Password</li></a>
+            <a href="statement.php"><li class="link7">Statement</li></a>
+            <a href="customer_pass_change.php"><li class="link2">Change Password</li></a>
+            <a href="Deposite.php"><li class="link3">Deposite Money</li></a>
             <a href="fund_transfer.php"><li class="link4">Fund Transfer</li></a>
-            <a href="cust_statement.php"><li class="link5">Statement</li></a>
+            <a href="Loan.php"><li class="link5">Request loan</li></a>
+            <a href="Pay_loan.php"><li class="link6">Pay loan</li></a>
             </ul>
             </div>
 

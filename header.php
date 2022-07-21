@@ -3,7 +3,7 @@
 		<div class="navBar">
 			<ul>
 				<li><a href="home.php">Home</a></li>
-				<!-- <li><a href="staff_login.php">Staff Login</a></li> -->
+				<li><a href="staff_login.php">Staff Login</a></li>
 			
 			</ul>
 		</div>

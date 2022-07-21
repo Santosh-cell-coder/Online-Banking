@@ -20,7 +20,8 @@ create table `registration`(
 );
 create table `depositor`(
     `account_number` int(10),
-    `deposite_amount` int(10)
+    `deposite_amount` int(10),
+    `InDtTm` DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 -- create table `customer`(
 --     `Customer_Id` varchar(10),
@@ -35,7 +36,8 @@ create table `borrower`(
 create table `loan`(
     `loan_number` varchar(12),
     `branch_name` varchar(25),
-    `amount` float(12,2)
+    `amount` float(12,2),
+    `InDtTm` DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 create table `account`(
@@ -43,12 +45,38 @@ create table `account`(
     `customer_name` varchar(35) not null,
     `branch_name` varchar(25),
     `account_number` int(10) ,
-    `balance` float(12,2) DEFAULT null,
+    `balance` float(12,2),
     primary key (`account_number`)
 );
+create table `staff`(
+    `staff_id` int(10) not null,
+    `staff_name` varchar(50),
+    `gender` varchar(7),
+    `dob` date not null,
+    `post` varchar(25),
+    `branch_name` varchar(25),
+    `mobile_no` varchar(10),
+    `email_id` varchar(35),
+    `home_addr` varchar(35),
+    `password` varchar(35),
+    primary key (`staff_id`)
+);
+CREATE TABLE `pending_loan` (
+  `Customer_Id` int(10) NOT NULL,
+  `branch_name` varchar(25),
+  `loan_num` int(10),
+  `amount` float(12,2),
+  `remark` varchar(50),
+  `InDtTm` DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
+alter table `staff` add constraint `uq_staff` unique key(`mobile_no`);
+alter table `staff` add constraint `uq1_staff` unique key(`email_id`);
 
 alter table `branch` add  primary key (`branch_name`);
+
+alter table `staff` add constraint `fk_staff` foreign key(`branch_name`)
+references `branch`(`branch_name`) ON DELETE CASCADE;
 
 alter table `branch` add constraint `ck` check (`branch_name` in (
 					  "Kathmandu","Pokhara","Biratnagar","Janakpur","Bharatpur","Bigunj",
@@ -59,35 +87,44 @@ alter table `branch` add constraint `ck` check (`branch_name` in (
 
 alter table `registration` add constraint `ck` check (`gender` in ("m","f"));                  
 
-alter table `loan` add  primary key (`loan_number`);
+alter table `borrower` add  primary key (`loan_number`);
 
 
 alter table `account` add constraint `fk_const` foreign key (`branch_name`)
-references `branch`(`branch_name`) ; 
+references `branch`(`branch_name`); 
 
 alter table `account` add constraint `fk2_const` foreign key (`Customer_Id`)
-references `registration`(`Customer_Id`) ; 
+references `registration`(`Customer_Id`) ON DELETE CASCADE; 
 
 alter table `depositor` add constraint `fk1_const` foreign key (`account_number`)
-references `account`(`account_number`);
+references `account`(`account_number`) ON DELETE CASCADE;
 
 alter table `loan` add constraint `fk3_const` foreign key (`branch_name`)
 references `branch`(`branch_name`);
 
-alter table `borrower` add constraint `fk6_const` foreign key (`loan_number`)
-references `loan`(`loan_number`);
+alter table `loan` add constraint `fk6_const` foreign key (`loan_number`)
+references `borrower`(`loan_number`) ON DELETE CASCADE;
 
 alter table `borrower` add constraint `fk4_const` foreign key (`Customer_Id`)
-references `registration`(`Customer_Id`);
+references `registration`(`Customer_Id`) ON DELETE CASCADE;
 
 alter table `registration` add constraint `fk5_const` foreign key (`branch_name`)
 references `branch`(`branch_name`);
+
+-- alter table `recordbook` add constraint `fk_rec` foreign key (`Customer_Id`)
+-- references `registration`(`Customer_Id`);
 
 alter table `registration` add constraint `uq_const` unique key (`mobile`);
 
 alter table `registration` add constraint `uq1_const` unique key (`email`);
 
 alter table `registration` add constraint `uq2_const` unique key (`citizenship`);
+
+alter table `pending_loan` add constraint `fk_pen` foreign key (`Customer_Id`)
+references `registration`(`Customer_Id`);
+
+alter table `pending_loan` add constraint `fk1_pen` foreign key (`branch_name`)
+references `branch`(`branch_name`);
 
 insert into `branch` values("Kathmandu",1500000000);
 insert into `branch` values("Pokhara",1000000000);
@@ -115,10 +152,24 @@ insert into `branch` values("Rajbiraj",400000000);
 insert into `branch` values("Baglung",100000000);
 insert into `branch` values("Tansen",90000000);
 
+insert into `staff` values(420,"Diwakar Sharma","m","1970-05-18","Bank manager",
+                          "Pokhara","9841250101","dewakarshrm70@gmail.com","Dang ghorahi-5","bankmanager");
+
 insert into `registration` values(100,"Sanjog Shrestha","m","2000-06-26","9812899991","ssanjogshrestha@gmail.com",
         "52-39-03987","Ghorahi","Bank road","Ghorahi","456852","password1",null);
 
 insert into `account` values(100,"Sanjog Shrestha","Ghorahi",1010100,0.00);
+CREATE TABLE `recordbook_100`( 
+    `Customer_Id` int(10) NOT NULL,
+    `transaction_id` varchar(10),
+    `Cr_amount` varchar(10),
+    `Dr_amount` varchar(10),
+    `Net_Balance` varchar(12),
+    `Remark` varchar(50),
+    `transaction_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    primary key (`transaction_id`),
+    FOREIGN KEY (`Customer_Id`) REFERENCES registration(`Customer_Id`)
+  );
 
 
 -- insert into `account` values(124567,1001,"Ghorahi",null);
